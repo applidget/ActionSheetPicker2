@@ -37,6 +37,7 @@
 @synthesize selectedIndex = _selectedIndex;
 @synthesize onActionSheetDone = _onActionSheetDone;
 @synthesize onActionSheetCancel = _onActionSheetCancel;
+@synthesize pickerFont = _pickerFont;
 
 + (id)showPickerWithTitle:(NSString *)title rows:(NSArray *)strings initialSelection:(NSInteger)index doneBlock:(ActionStringDoneBlock)doneBlock cancelBlock:(ActionStringCancelBlock)cancelBlockOrNil origin:(id)origin {
     ActionSheetStringPicker * picker = [[ActionSheetStringPicker alloc] initWithTitle:title rows:strings initialSelection:index doneBlock:doneBlock cancelBlock:cancelBlockOrNil origin:origin];
@@ -135,6 +136,25 @@
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     return pickerView.frame.size.width - 30;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+  UILabel *label = (UILabel *)view;
+
+  if (!label) {
+    label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor clearColor];
+  }
+  
+  if (_pickerFont)
+    label.font = _pickerFont;
+  else
+    label.font = [UIFont boldSystemFontOfSize:16];
+
+  NSString *text = [self pickerView:pickerView titleForRow:row forComponent:component];
+  label.text = [NSString stringWithFormat:@"  %@  ", text];
+  
+  return label;
 }
 
 #pragma mark - Block setters
