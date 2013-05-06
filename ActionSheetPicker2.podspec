@@ -17,6 +17,4 @@ Pod::Spec.new do |s|
   s.source_files = 'ActionSheetPicker.h', 'Pickers/*.{h,m}' 
 
   s.framework = 'UIKit'
-
-  end
 end
