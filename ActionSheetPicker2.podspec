@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/brunow/ActionSheetPicker2.git', :tag => '0.1' }
   s.platform = :ios
   s.source_files = 'ActionSheetPicker.h', 'Pickers/*.{h,m}' 
-
+  s.requires_arc = false
+  
   s.framework = 'UIKit'
 end
